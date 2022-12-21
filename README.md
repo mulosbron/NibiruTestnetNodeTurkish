@@ -17,21 +17,32 @@
 ## Başlangıç
 ```
 sudo su
+
 cd
+
 sudo apt update && sudo apt upgrade -y
+
 sudo apt-get install curl gcc make jq screen -y
+
 screen -S nibiru
 ```
+
 #### * İşimiz bittiğinde screen'den çıkmak için CTRL+A+D tuş kombinasyonlarını kullanın. Screen'e tekrar girmek için `screen -r nibiru` kodunu kullanın.
 
 ## Go'yu yükleyin
 ```
 wget https://golang.org/dl/go1.19.3.linux-amd64.tar.gz
+
 sudo tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
+
 rm go1.19.3.linux-amd64.tar.gz
+
 export GOROOT=/usr/local/go
+
 export GOPATH=$HOME/go
+
 export GO111MODULE=on
+
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 ```
 
@@ -44,8 +55,11 @@ go version
 ## Nibiru'yu yükleyin
 ```
 git clone https://github.com/NibiruChain/nibiru && cd nibiru
+
 git fetch origin --tags
+
 git checkout v0.16.2
+
 make install
 ```
 
@@ -65,12 +79,14 @@ nibid init <NODEADI> --chain-id nibiru-testnet-2
 #### * Yeni cüzdan oluşturun veya eski cüzdanınızı kurtarın.
 ```
 nibid keys add <CUZDANADI>
+
 nibid keys add <CUZDANADI> --recover
 ```
 
 #### * Genesis dosyasını yükleyin ve ikinci komut ile çıktıyı kontrol edin. (Çıktı:`5cedb9237c6d807a89468268071647649e90b40ac8cd6d1ded8a72323144880d`)
 ```
 curl -s https://rpc.testnet-2.nibiru.fi/genesis | jq -r .result.genesis > $HOME/.nibid/config/genesis.json
+
 shasum -a 256 $HOME/.nibid/config/genesis.json
 ```
 
@@ -116,8 +132,10 @@ nibid status 2>&1 | jq .SyncInfo
 #### * Faucet'ten token talep edin.
 ```
 FAUCET_URL="https://faucet.testnet-2.nibiru.fi/"
+
 ADDR=<ADRESINIZ>
-curl -X POST -d '{"address": "'"$ADDR"'", "coins": ["10000000unibi","100000000000unusd"]}' $FAUCET_URL
+
+curl -X POST -d '{"address": "'"$ADDR"'", "coins": ["10000000unibi"]}' $FAUCET_URL
 ```
 
 #### * Validator'u oluşturun. (Validator'u oluşturmadan önce cüzdanınızda NIBI bulunmalı)
@@ -137,5 +155,6 @@ nibid tx staking create-validator \
 ```
 
 #### * Son olarak yukarıdaki komutun verdiği hash'i explorer'da aratın. Sonuç `success` ise olmuştur.
+![Ekran görüntüsü 2022-12-21 202905](https://user-images.githubusercontent.com/91866065/208967689-1f8b360e-885f-40a5-af22-1338f323b327.png)
 
-# <h1 align="center">[Mulosbron's Validator]() </h1>
+# <h1 align="center">[Mulosbron's Validator](https://testnet-2.nibiru.fi/validators/nibivaloper1ns372uy5fdy94mzny56dph7l30706lhkkctyme) </h1>
